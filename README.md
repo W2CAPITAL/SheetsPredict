@@ -632,3 +632,14 @@ node skills/bpmn/scripts/bpmn-tool.mjs find processo.bpmn "prazo"
 ```
 
 O layout existente é preservado por padrão. `--rebuild` só deve ser usado quando a reconstrução total do diagrama for desejada. A licença original está em `skills/bpmn/THIRD_PARTY_LICENSE.md`.
+
+## Deploy alternativo gratuito — Cloudflare Workers
+
+Além da configuração Vercel, o repositório inclui deploy para Cloudflare Workers com Static Assets. O frontend/PWA é publicado como asset estático e somente `/api/*` passa pelo Worker, reutilizando os módulos de API existentes através de uma camada de compatibilidade `req/res`.
+
+```bash
+npm run cf:build
+npm run deploy:cloudflare
+```
+
+A configuração está em `wrangler.jsonc` e o guia completo em `docs/CLOUDFLARE-DEPLOY.md`. Credenciais continuam fora do GitHub e devem ser cadastradas como Variables/Secrets no Worker.
