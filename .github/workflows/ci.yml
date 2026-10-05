@@ -25,3 +25,9 @@ jobs:
           test -f sw.js
           test -f api/djen.js
           test -f api/v1/comunicacao.js
+          test -f wrangler.jsonc
+          test -f cloudflare/worker.js
+      - name: Install Cloudflare tooling
+        run: npm install --no-audit --no-fund
+      - name: Cloudflare bundle dry-run
+        run: npm run cf:dry-run
