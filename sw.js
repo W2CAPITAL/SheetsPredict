@@ -1,5 +1,5 @@
-const CACHE="sheetspredict-v60";
-const SHELL=["/index.html","/styles.css","/app.js","/lib/device-profile.js","/lib/needle-router.js","/lib/crm-model.js","/lib/task-priority.js","/lib/suggest-response.js","/lib/sheets-hub.js","/lib/predict-studio.js","/lib/wa-auto.js","/lib/predict-runtime.js","/lib/predict-studio-catalog.js","/lib/legal-document-generator.js","/manifest.webmanifest"];
+const CACHE="sheetspredict-v61";
+const SHELL=["/index.html","/styles.css","/app.js","/lib/device-profile.js","/lib/needle-router.js","/lib/crm-model.js","/lib/task-priority.js","/lib/suggest-response.js","/lib/sheets-hub.js","/lib/predict-learning-pack.js","/lib/predict-studio.js","/lib/wa-auto.js","/lib/predict-runtime.js","/lib/predict-studio-catalog.js","/lib/legal-document-generator.js","/manifest.webmanifest"];
 
 self.addEventListener("install",event=>{
   // A versão nova fica aguardando até a página bloquear login/edições,
@@ -27,7 +27,7 @@ self.addEventListener("fetch",event=>{
   if(url.pathname.startsWith("/api/"))return;
 
   // IMPORTANTE:
-  // navegacoes (/tarefas, /processos, /clientes etc.) ficam a cargo da Vercel.
+  // navegacoes (/tarefas, /processos, /clientes etc.) ficam a cargo do host.
   // Interceptar Request.mode="navigate" pode devolver uma resposta redirect
   // para um request com redirect="manual", causando ERR_FAILED no Chrome.
   if(request.mode==="navigate"||request.destination==="document")return;
