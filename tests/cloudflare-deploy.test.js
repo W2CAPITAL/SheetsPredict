@@ -48,3 +48,5 @@ for(const key of [
   assert.ok(workerEnvContract.includes('"'+key+'"'),"Worker não sincroniza runtime env: "+key);
 }
 assert.match(workerEnvContract,/syncRuntimeEnv\(env\)/,"Worker deve sincronizar runtime env antes das rotas");
+
+assert.equal(config.keep_vars,true,"Wrangler deve preservar Runtime Variables/Secrets cadastrados no dashboard");
