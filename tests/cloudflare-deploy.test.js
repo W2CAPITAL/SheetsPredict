@@ -38,3 +38,13 @@ assert.equal(pkg.scripts["cf:build"],"node scripts/build-cloudflare.js");
 assert.match(pkg.scripts["deploy:cloudflare"],/wrangler deploy/);
 
 console.log("cloudflare-deploy: ok");
+
+const workerEnvContract=worker;
+for(const key of [
+  "LEXIS_APPS_SCRIPT_URL","LEXIS_SHEETS_TOKEN","LEXIS_SHEET_URL",
+  "DJEN_UPSTREAM","DATAJUD_API_KEY","PREDICTLM_URL","PREDICTLM_API_KEY",
+  "LEXISPREDICT_URL","LEXISPREDICT_API_KEY","WA_AUTO_URL","GREY_URL","GREY_API_KEY"
+]){
+  assert.ok(workerEnvContract.includes('"'+key+'"'),"Worker não sincroniza runtime env: "+key);
+}
+assert.match(workerEnvContract,/syncRuntimeEnv\(env\)/,"Worker deve sincronizar runtime env antes das rotas");
