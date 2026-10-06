@@ -60,3 +60,12 @@ npx wrangler deploy --dry-run
 ```
 
 The old `vercel.json` remains in the repository so the same source can still deploy to Vercel if that workspace is reactivated later.
+
+
+## Runtime variables managed in the dashboard
+
+Production secrets and runtime variables are intentionally managed in Cloudflare **Settings → Variables and Secrets**, not committed to Git.
+
+The Wrangler configuration uses `keep_vars: true` so Git-based `wrangler deploy` runs preserve values already configured in the Cloudflare dashboard.
+
+Do not copy real API keys, tokens, or credentials into the `vars` block of `wrangler.jsonc`.

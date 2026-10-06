@@ -16,5 +16,6 @@
   },
   "build": {
     "command": "npm run cf:build"
-  }
+  },
+  "keep_vars": true
 }
