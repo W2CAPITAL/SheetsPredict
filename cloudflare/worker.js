@@ -12,6 +12,42 @@ import sheetsHandler from "../api/sheets.js";
 import comunicacaoHandler from "../api/v1/comunicacao.js";
 import waAutoHandler from "../api/wa-auto.js";
 
+const RUNTIME_ENV_KEYS=[
+  "LEXIS_SHEETS_TOKEN",
+  "LEXIS_APPS_SCRIPT_URL",
+  "LEXIS_SHEET_URL",
+  "DJEN_UPSTREAM",
+  "DATAJUD_API_KEY",
+  "ASHNA_API_KEY",
+  "ASHNA_BASE_URL",
+  "ASHNA_MODEL",
+  "ASHNA_AGENT_ID",
+  "PREDICTLM_URL",
+  "PREDICTLM_API_KEY",
+  "SHEETSPREDICT_AI_BASE_URL",
+  "SHEETSPREDICT_AI_API_KEY",
+  "SHEETSPREDICT_AI_MODEL",
+  "SHEETSPREDICT_AI_NAME",
+  "WA_AUTO_URL",
+  "GREY_URL",
+  "GREY_API_KEY",
+  "LEADCHECKIN_URL",
+  "LEXISPREDICT_URL",
+  "LEXISPREDICT_API_KEY",
+  "KHOJ_URL",
+  "KHOJ_TOKEN",
+  "KHOJ_AGENT_SLUG"
+];
+
+function syncRuntimeEnv(env){
+  if(typeof process==="undefined"||!process.env)return;
+  for(const key of RUNTIME_ENV_KEYS){
+    const value=env?.[key];
+    if(typeof value==="string"&&value.length)process.env[key]=value;
+    else if(value===undefined||value===null)delete process.env[key];
+  }
+}
+
 const MAX_BODY=2_000_000;
 const apiRoutes=new Map([
   ["/api/config",configHandler],
@@ -130,6 +166,7 @@ async function runApi(request){
 
 export default {
   async fetch(request,env){
+    syncRuntimeEnv(env);
     const url=new URL(request.url);
     if(url.pathname==="/api"||url.pathname.startsWith("/api/")){
       return runApi(request);
