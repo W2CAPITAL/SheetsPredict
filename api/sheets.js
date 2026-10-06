@@ -2,7 +2,7 @@ const {validateSession,requireSameOrigin,setSessionCookie,clearSessionCookie}=re
 const {scopeRows,isElevated}=require("../lib/sheet-scope");
 const {routeSheetsAction,bridgeCapabilityFor}=require("../lib/needle-router");
 function safeUrl(raw){
-  let u;try{u=new URL(String(raw||""))}catch{throw new Error("LEXIS_APPS_SCRIPT_URL inválida ou ausente na Vercel.")}
+  let u;try{u=new URL(String(raw||""))}catch{throw new Error("LEXIS_APPS_SCRIPT_URL inválida ou ausente no ambiente do servidor.")}
   const okHost=u.hostname==="script.google.com"||u.hostname.endsWith(".script.google.com")||u.hostname==="script.googleusercontent.com";
   if(!okHost||u.protocol!=="https:")throw new Error("LEXIS_APPS_SCRIPT_URL deve ser uma URL HTTPS do Google Apps Script.");
   if(u.hostname==="script.google.com"&&!/\/macros\/s\/.+\/exec\/?$/.test(u.pathname))throw new Error("LEXIS_APPS_SCRIPT_URL deve terminar em /exec.");
@@ -120,7 +120,7 @@ module.exports=async(req,res)=>{
 
     const url=safeUrl(process.env.LEXIS_APPS_SCRIPT_URL);
     const fixedToken=String(process.env.LEXIS_SHEETS_TOKEN||"").trim();
-    if(!fixedToken)return res.status(500).json({ok:false,error:"LEXIS_SHEETS_TOKEN não está configurado na Vercel."});
+    if(!fixedToken)return res.status(500).json({ok:false,error:"LEXIS_SHEETS_TOKEN não está configurado no ambiente do servidor."});
 
     let auth=null;
     if(!["login","auth","ping","logout"].includes(action)){
@@ -162,13 +162,13 @@ module.exports=async(req,res)=>{
       if(route.tool==="get_process"&&qDigits.length===20){
         upstream=await fetchBridge(url,{action:"get",protocolo:qDigits,sess:auth.sess,token:fixedToken},"get");
         if(upstream?.parseError)return transientRead(res,action,"A planilha não respondeu corretamente à busca direta.",upstream?.up?.status||503);
-        if(upstream?.data?.error==="token invalido")return res.status(401).json({ok:false,error:"LEXIS_SHEETS_TOKEN da Vercel não corresponde ao Apps Script publicado.",reason:"token_mismatch"});
+        if(upstream?.data?.error==="token invalido")return res.status(401).json({ok:false,error:"LEXIS_SHEETS_TOKEN do ambiente do servidor não corresponde ao Apps Script publicado.",reason:"token_mismatch"});
         const row=upstream?.data?.row||(Array.isArray(upstream?.data?.data)?upstream.data.data[0]:null);
         source=row?[row]:[];
       }else{
         upstream=await fetchBridge(url,{action:"list",limit:8000,sess:auth.sess,token:fixedToken},"legacy_list");
         if(upstream?.parseError)return transientRead(res,action,"A planilha não respondeu corretamente à busca.",upstream?.up?.status||503);
-        if(upstream?.data?.error==="token invalido")return res.status(401).json({ok:false,error:"LEXIS_SHEETS_TOKEN da Vercel não corresponde ao Apps Script publicado."});
+        if(upstream?.data?.error==="token invalido")return res.status(401).json({ok:false,error:"LEXIS_SHEETS_TOKEN do ambiente do servidor não corresponde ao Apps Script publicado."});
         source=Array.isArray(upstream?.data?.rows)?upstream.data.rows:
           (Array.isArray(upstream?.data?.todas)?upstream.data.todas:
           (Array.isArray(upstream?.data?.data)?upstream.data.data:[]));
@@ -273,7 +273,7 @@ module.exports=async(req,res)=>{
       const payload={
         ok:false,
         authenticated:false,
-        error:"LEXIS_SHEETS_TOKEN da Vercel não corresponde à Script Property LEXIS_SHEETS_TOKEN do Apps Script publicado.",
+        error:"LEXIS_SHEETS_TOKEN do ambiente do servidor não corresponde à Script Property LEXIS_SHEETS_TOKEN do Apps Script publicado.",
         reason:"token_mismatch"
       };
       // Ping é diagnóstico/configuração, então responde 200 para que a UI
