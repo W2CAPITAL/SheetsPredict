@@ -1,5 +1,5 @@
-const CACHE="sheetspredict-v62";
-const SHELL=["/index.html","/styles.css","/app.js","/lib/device-profile.js","/lib/needle-router.js","/lib/crm-model.js","/lib/task-priority.js","/lib/suggest-response.js","/lib/sheets-hub.js","/lib/predict-learning-pack.js","/lib/predict-studio.js","/lib/wa-auto.js","/lib/predict-runtime.js","/lib/predict-studio-catalog.js","/lib/openbot-policy.js","/lib/openbot-workspace.js","/workers/sheets-qwen-0.5b.worker.mjs","/lib/legal-document-generator.js","/manifest.webmanifest"];
+const CACHE="sheetspredict-v63";
+const SHELL=["/index.html","/styles.css","/app.js","/lib/device-profile.js","/lib/needle-router.js","/lib/crm-model.js","/lib/task-priority.js","/lib/suggest-response.js","/lib/sheets-hub.js","/lib/predict-learning-pack.js","/lib/predict-studio.js","/lib/wa-auto.js","/lib/predict-runtime.js","/lib/predict-studio-catalog.js","/lib/openbot-policy.js","/lib/colibri-local.js","/lib/openbot-workspace.js","/workers/sheets-qwen-0.5b.worker.mjs","/lib/legal-document-generator.js","/manifest.webmanifest"];
 
 self.addEventListener("install",event=>{
   // A versão nova fica aguardando até a página bloquear login/edições,
