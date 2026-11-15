@@ -23,6 +23,7 @@ const PUBLIC_LIB_FILES=[
   "predict-studio.js",
   "wa-auto.js",
   "openbot-policy.js",
+  "colibri-local.js",
   "openbot-workspace.js",
   "legal-document-generator.js"
 ];
