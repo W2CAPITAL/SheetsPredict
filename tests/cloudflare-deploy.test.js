@@ -29,7 +29,7 @@ for(const asset of [
   "device-profile.js","needle-router.js","crm-model.js","task-priority.js",
   "suggest-response.js","sheets-hub.js","predict-learning-pack.js",
   "predict-studio-catalog.js","predict-runtime.js","predict-studio.js",
-  "wa-auto.js","openbot-policy.js","openbot-workspace.js","legal-document-generator.js"
+  "wa-auto.js","openbot-policy.js","colibri-local.js","openbot-workspace.js","legal-document-generator.js"
 ]) assert.ok(build.includes(asset),"browser lib não publicada: "+asset);
 assert.ok(!/fs\.cpSync\([^\n]*["']lib["']/.test(build),"diretório lib completo não deve ser publicado");
 
