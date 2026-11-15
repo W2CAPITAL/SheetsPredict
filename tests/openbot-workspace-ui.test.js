@@ -6,7 +6,7 @@ test('SheetsPredict OpenBot workspace only renders inside the existing authentic
  assert.match(read('app.js'),/renderOpenBotAgents/);
  const ui=read('lib/openbot-workspace.js');
  assert.match(ui,/SheetsOpenBotPolicy/);
- assert.match(ui,/sheets-qwen-0\\.5b\\.worker\\.mjs/);
+ assert.match(ui,/sheets-qwen-0\.5b\.worker\.mjs/);
  assert.match(ui,/ensureLocal/);
  assert.match(ui,/oneSessionUrl/);
  assert.doesNotMatch(ui,/sendMessage\(|\/api\/wa-auto.*send|fetch\(.*\/api\/wa-auto/);
