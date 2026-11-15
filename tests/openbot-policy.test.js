@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict');
-const {ROLES,routeQuestion,validateApproval,oneSessionUrl}=require('../lib/openbot-policy.cjs');
+const {ROLES,routeQuestion,validateApproval,oneSessionUrl}=require('../lib/openbot-policy.js');
 test('Sheetspredict has six readonly work roles',()=>{
  assert.equal(ROLES.length,6); assert.ok(ROLES.every(x=>x.canSend===false));
 });
