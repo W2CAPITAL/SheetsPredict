@@ -8,7 +8,7 @@ const PUBLIC_FILES=[
 ];
 const PUBLIC_DIRS=[
   "assets","agenda","analise","cases","central","clientes","documentos","financeiro",
-  "pipeline","processos-empresa","processos","report","scanner","studio","tarefas"
+  "pipeline","processos-empresa","processos","report","scanner","studio","tarefas","workers"
 ];
 const PUBLIC_LIB_FILES=[
   "device-profile.js",
@@ -22,6 +22,8 @@ const PUBLIC_LIB_FILES=[
   "predict-runtime.js",
   "predict-studio.js",
   "wa-auto.js",
+  "openbot-policy.js",
+  "openbot-workspace.js",
   "legal-document-generator.js"
 ];
 
