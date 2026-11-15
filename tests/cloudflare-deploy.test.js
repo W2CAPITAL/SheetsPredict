@@ -29,7 +29,7 @@ for(const asset of [
   "device-profile.js","needle-router.js","crm-model.js","task-priority.js",
   "suggest-response.js","sheets-hub.js","predict-learning-pack.js",
   "predict-studio-catalog.js","predict-runtime.js","predict-studio.js",
-  "wa-auto.js","legal-document-generator.js"
+  "wa-auto.js","openbot-policy.js","openbot-workspace.js","legal-document-generator.js"
 ]) assert.ok(build.includes(asset),"browser lib não publicada: "+asset);
 assert.ok(!/fs\.cpSync\([^\n]*["']lib["']/.test(build),"diretório lib completo não deve ser publicado");
 
@@ -50,3 +50,5 @@ for(const key of [
 assert.match(workerEnvContract,/syncRuntimeEnv\(env\)/,"Worker deve sincronizar runtime env antes das rotas");
 
 assert.equal(config.keep_vars,true,"Wrangler deve preservar Runtime Variables/Secrets cadastrados no dashboard");
+
+for(const asset of ['"workers"','"openbot-policy.js"','"openbot-workspace.js"'])assert.ok(build.includes(asset),'OpenBot asset ausente: '+asset);
