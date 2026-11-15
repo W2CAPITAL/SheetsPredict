@@ -879,6 +879,7 @@ function titleFor(v){return {
   dashboard:["COMMAND CENTER","Dashboard"],
   hub:["CENTRAL","Central Integrada"],
   studio:["AI FABRIC","Predict Studio"],
+  agents:["OPENBOT · SHEETSPREDICT","Agentes jurídicos"],
   waauto:["WHATSAPP","WA.Auto"],
   processos:["CARTEIRA","Processos"],
   empresa:["EMPRESA","Processos da empresa"],
@@ -893,7 +894,7 @@ function titleFor(v){return {
   scanner:["REDE JUDICIAL","DataJud + DJEN"],
   settings:["PREFERÊNCIAS","Configurações"]
 }[v]||["SHEETSPREDICT","Dashboard"]}
-const viewPaths={dashboard:"/",hub:"/central",studio:"/studio",waauto:"/wa-auto",processos:"/cases",empresa:"/processos",clientes:"/clientes",pipeline:"/pipeline",agenda:"/agenda",financeiro:"/financeiro",tarefas:"/tarefas",analise:"/analise",report:"/report",documentos:"/documentos",scanner:"/scanner",settings:"/configuracoes"};
+const viewPaths={dashboard:"/",hub:"/central",studio:"/studio",agents:"/agentes",waauto:"/wa-auto",processos:"/cases",empresa:"/processos",clientes:"/clientes",pipeline:"/pipeline",agenda:"/agenda",financeiro:"/financeiro",tarefas:"/tarefas",analise:"/analise",report:"/report",documentos:"/documentos",scanner:"/scanner",settings:"/configuracoes"};
 function pathView(){
   const rawHash=String(location.hash||"").replace(/^#/,"").replace(/\/+$/,"");
   if(rawHash){
@@ -928,6 +929,7 @@ function renderCurrentView(){
   if(state.view==="dashboard")renderDashboard();
   else if(state.view==="hub")renderHub();
   else if(state.view==="studio")renderPredictStudio();
+  else if(state.view==="agents")renderOpenBotAgents();
   else if(state.view==="waauto")renderWAAuto();
   else if(state.view==="processos")renderProcessos();
   else if(state.view==="empresa")renderEmpresa();
@@ -948,6 +950,13 @@ function render(){
   const m=metrics();$("#navProcessos").textContent=m.total;$("#navEmpresa").textContent=state.companyRows.length;$("#navClientes").textContent=crmClients().length;$("#navTarefas").textContent=tasks().length;
   updateSyncUi();
   renderCurrentView();
+}
+function renderOpenBotAgents(){
+ const root=$("#content");if(!root)return;
+ if(!window.SheetsOpenBotWorkspace||!window.SheetsOpenBotPolicy){
+  root.textContent="Agentes OpenBot indisponíveis. Atualize o aplicativo para carregar os módulos locais.";return;
+ }
+ window.SheetsOpenBotWorkspace.render(root,{rows:()=>state.companyRows.length?state.companyRows:state.rows,showBanner});
 }
 function renderPredictStudio(){
   const root=$("#content");
