@@ -28,6 +28,17 @@
 
 ---
 
+<!-- W1_DISTRIBUICAO_INICIO -->
+## Distribuição e acesso
+
+O SheetsPredict é uma aplicação web/PWA, sem instalador Windows publicado no repositório. Para os aplicativos desktop do ecossistema, consulte a [Central de Aplicativos W1](https://github.com/W1CAPITAL/Central-de-Apps); o SheetsPredict não é anunciado como instalável na Central.
+
+[Releases disponíveis](https://github.com/W1CAPITAL/Central-de-Apps/releases) · [Catálogo do ecossistema](https://github.com/W1CAPITAL/Central-de-Apps/blob/main/docs/ECOSSISTEMA-W1.md) · [Central de Aplicativos W1 — Windows x64, prévia v0.1.48](https://github.com/W1CAPITAL/Central-de-Apps/releases/download/preview-v0.1.48/W1-Central-de-Apps-Setup-0.1.48-x64.exe)
+
+**Nota de distribuição:** os arquivos indicados são pré-releases de teste. Consulte as assinaturas, os hashes e a publicação mais recente antes da instalação; versões de teste não entram automaticamente no canal de atualização assinada.
+<!-- W1_DISTRIBUICAO_FIM -->
+
+
 **Versão atual: 4.5.0**
 
 SheetsPredict mantém o **Google Sheets como fonte operacional de verdade**, usa IndexedDB como réplica local/offline e concentra integrações externas atrás de funções server-side. O navegador não precisa conhecer chaves de PredictLM, LexisPredict, WA.Auto ou provedores de IA.
